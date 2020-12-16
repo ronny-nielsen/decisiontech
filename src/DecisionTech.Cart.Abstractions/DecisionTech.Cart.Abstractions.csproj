@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DecisionTech.Cart.Dtos\DecisionTech.Cart.Dtos.csproj" />
+    <ProjectReference Include="..\DecisionTech.Cart.Models\DecisionTech.Cart.Models.csproj" />
+  </ItemGroup>
+
 </Project>
