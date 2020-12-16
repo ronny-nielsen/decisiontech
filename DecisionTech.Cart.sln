@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DE9D9E0A-314A-4B81-BC28-53CFFEE0F267}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{06D14C18-BF89-41C3-B7CF-96A6DA2F051D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecisionTech.Cart.Unit.Tests", "test\DecisionTech.Cart.Unit.Tests\DecisionTech.Cart.Unit.Tests.csproj", "{74EB066D-79F9-478C-B43A-73E43E26C698}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74EB066D-79F9-478C-B43A-73E43E26C698}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74EB066D-79F9-478C-B43A-73E43E26C698}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74EB066D-79F9-478C-B43A-73E43E26C698}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74EB066D-79F9-478C-B43A-73E43E26C698}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{74EB066D-79F9-478C-B43A-73E43E26C698} = {06D14C18-BF89-41C3-B7CF-96A6DA2F051D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {81AF37DD-45A7-4FDA-AC06-F506429459A8}
+	EndGlobalSection
+EndGlobal
