@@ -30,6 +30,12 @@ namespace DecisionTech.Cart
         };
 
         private readonly Models.Cart _cart = new Models.Cart();
+        private readonly List<IDiscountService> _discounts;
+
+        public CartService(List<IDiscountService> discounts)
+        {
+            _discounts = discounts ?? throw new System.ArgumentNullException(nameof(discounts));
+        }
 
         public CartDto Get()
         {
@@ -69,6 +75,8 @@ namespace DecisionTech.Cart
             {
                 cart.Items.Add(new Models.CartItem { Product = product, Quantity = request.Quantity });
             }
+
+            _discounts.ForEach(x => x.Execute(cart));
 
             result.Model = ConvertToDto(cart);
             return result;

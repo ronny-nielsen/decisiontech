@@ -1,3 +1,5 @@
+using DecisionTech.Cart.Abstractions;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -8,7 +10,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenGettingShouldReturnCart()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.Get();
             Assert.NotNull(cart);
         }
@@ -16,7 +19,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenGettingShouldReturnCartItems()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.Get();
             Assert.Empty(cart.Items);
         }
@@ -24,7 +28,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenGettingShouldReturnCartSubTotal()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.Get();
             Assert.Equal(0, cart.SubTotal);
         }
@@ -32,7 +37,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenGettingShouldReturnCartDiscount()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.Get();
             Assert.Equal(0, cart.Discount);
         }
@@ -40,7 +46,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenGettingShouldReturnCartTotal()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.Get();
             Assert.Equal(0, cart.Total);
         }
@@ -48,7 +55,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenNoRequestShouldReturnFailure()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var result = sut.AddItem(cart, null);
@@ -58,7 +66,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenNoRequestShouldReturnError()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var result = sut.AddItem(cart, null);
@@ -68,7 +77,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenEmptyRequestShouldReturnFailure()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var result = sut.AddItem(cart, new Dtos.CartRequest());
@@ -78,7 +88,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenEmptyRequestShouldReturnError()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var result = sut.AddItem(cart, new Dtos.CartRequest());
@@ -88,7 +99,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenInvalidRequestShouldReturnFailure()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var result = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 100 });
@@ -98,7 +110,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenInvalidRequestShouldReturnError()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var result = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 100 });
@@ -108,7 +121,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenRequestShouldReturnSuccess()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var result = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1 });
@@ -118,7 +132,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenRequestShouldReturnCartWithItem()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var result = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1 });
@@ -129,7 +144,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenRequestShouldReturnCartWithItemName()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var result = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1 });
@@ -141,7 +157,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenRequestShouldReturnCartWithItemCost()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var result = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1 });
@@ -153,7 +170,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenRequestShouldReturnCartWithItemQuantity()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var result = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1 });
@@ -165,7 +183,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenButterAndMilkAndBreadRequestShouldReturnSuccess()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var butterResult = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1 });
@@ -177,7 +196,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenButterAndMilkAndBreadRequestShouldReturnCartWithItemSubTotal()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             _ = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1 });
@@ -190,7 +210,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenButterAndMilkAndBreadRequestShouldReturnCartWithItemDiscount()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             _ = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1 });
@@ -203,7 +224,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenButterAndMilkAndBreadRequestShouldReturnCartWithItemTotal()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             _ = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1 });
@@ -216,7 +238,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenTwoButterAndBreadRequestShouldReturnSuccess()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var butterResult = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1, Quantity = 2 });
@@ -227,7 +250,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenTwoButterAndBreadRequestShouldReturnCartWithItemSubTotal()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             _ = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1, Quantity = 2 });
@@ -239,7 +263,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenTwoButterAndBreadRequestShouldReturnCartWithItemDiscount()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             _ = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1, Quantity = 2 });
@@ -251,7 +276,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenTwoButterAndBreadRequestShouldReturnCartWithItemTotal()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             _ = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1, Quantity = 2 });
@@ -263,7 +289,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenFourMilkRequestShouldReturnSuccess()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var result = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 2, Quantity = 4 });
@@ -273,7 +300,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenFourMilkRequestShouldReturnCartWithItemSubTotal()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var result = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 2, Quantity = 4 });
@@ -284,7 +312,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenFourMilkRequestShouldReturnCartWithItemDiscount()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var result = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 2, Quantity = 4 });
@@ -295,7 +324,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenFourMilkRequestShouldReturnCartWithItemTotal()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var result = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 2, Quantity = 4 });
@@ -306,7 +336,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenTwoButterAndEightMilkAndBreadRequestShouldReturnSuccess()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             var butterResult = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1, Quantity = 2 });
@@ -318,7 +349,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenTwoButterAndEightMilkAndBreadRequestShouldReturnCartWithItemSubTotal()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             _ = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1, Quantity = 2 });
@@ -331,7 +363,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenTwoButterAndEightMilkAndBreadRequestShouldReturnCartWithItemDiscount()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             _ = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1, Quantity = 2 });
@@ -344,7 +377,8 @@ namespace DecisionTech.Cart.Unit.Tests
         [Fact]
         public void WhenAddingGivenTwoButterAndEightMilkAndBreadRequestShouldReturnCartWithItemTotal()
         {
-            var sut = new CartService();
+            var discounts = new List<IDiscountService> { new ButterDiscountService(), new MilkDiscountService(), new BreadDiscountService() };
+            var sut = new CartService(discounts);
             var cart = sut.GetModel();
 
             _ = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 1, Quantity = 2 });
