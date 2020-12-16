@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\DecisionTect.Cart\DecisionTect.Cart.csproj" />
+    <ProjectReference Include="..\..\src\DecisionTect.Cart\DecisionTech.Cart.csproj" />
   </ItemGroup>
 
 </Project>

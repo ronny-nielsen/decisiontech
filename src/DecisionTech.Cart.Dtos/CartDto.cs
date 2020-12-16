@@ -5,7 +5,7 @@ namespace DecisionTech.Cart.Dtos
 {
     public class CartDto
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         public IList<CartItemDto> Items { get; set; }
 

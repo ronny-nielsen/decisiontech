@@ -1,23 +1,54 @@
 ﻿using DecisionTech.Cart.Abstractions;
 using DecisionTech.Cart.Dtos;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace DecisionTect.Cart
+namespace DecisionTech.Cart
 {
     public class CartService : ICartService
     {
+        private readonly Models.Cart _cart = new Models.Cart();
+
         public CartDto Get()
         {
-            throw new System.NotImplementedException();
+            var cart = GetModel();
+            return ConvertToDto(cart);
         }
 
-        public DecisionTech.Cart.Models.Cart GetModel()
+        public Models.Cart GetModel()
         {
-            throw new System.NotImplementedException();
+            return _cart;
         }
 
-        public CommandResult<CartDto> AddItem(DecisionTech.Cart.Models.Cart cart, CartRequest request)
+        public CommandResult<CartDto> AddItem(Models.Cart cart, CartRequest request)
         {
-            throw new System.NotImplementedException();
+            var result = new CommandResult<CartDto>();
+            return result;
+        }
+
+        private static CartDto ConvertToDto(Models.Cart cart)
+        {
+            if (cart == null) return null;
+
+            return new CartDto
+            {
+                Id = cart.Id,
+                Items = cart.Items.Select(x => ConvertItemToDto(x)).ToList()
+            };
+        }
+
+        private static CartItemDto ConvertItemToDto(Models.CartItem item)
+        {
+            if (item == null) return null;
+
+            return new CartItemDto
+            {
+                Cost = item.Product != null ? item.Product.Cost : 0,
+                ProductId = item.Product != null ? item.Product.Id : 0,
+                ProductName = item.Product?.Name,
+                Quantity = item.Quantity,
+                Discount = item.Discount
+            };
         }
     }
 }
