@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{06D14C18-B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecisionTech.Cart.Unit.Tests", "test\DecisionTech.Cart.Unit.Tests\DecisionTech.Cart.Unit.Tests.csproj", "{74EB066D-79F9-478C-B43A-73E43E26C698}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecisionTech.Cart", "src\DecisionTect.Cart\DecisionTech.Cart.csproj", "{D82C8F0C-FA38-4F2C-9D5F-321E61DDC6DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecisionTech.Cart", "src\DecisionTech.Cart\DecisionTech.Cart.csproj", "{D82C8F0C-FA38-4F2C-9D5F-321E61DDC6DB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecisionTech.Cart.Abstractions", "src\DecisionTech.Cart.Abstractions\DecisionTech.Cart.Abstractions.csproj", "{04628489-2CED-4A5F-9742-D4DC432273B3}"
 EndProject
