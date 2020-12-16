@@ -86,6 +86,26 @@ namespace DecisionTech.Cart.Unit.Tests
         }
 
         [Fact]
+        public void WhenAddingGivenInvalidRequestShouldReturnFailure()
+        {
+            var sut = new CartService();
+            var cart = sut.GetModel();
+
+            var result = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 100 });
+            Assert.False(result.Success);
+        }
+
+        [Fact]
+        public void WhenAddingGivenInvalidRequestShouldReturnError()
+        {
+            var sut = new CartService();
+            var cart = sut.GetModel();
+
+            var result = sut.AddItem(cart, new Dtos.CartRequest { ProductId = 100 });
+            Assert.Contains("The ProductId field is invalid.", result.Errors);
+        }
+
+        [Fact]
         public void WhenAddingGivenRequestShouldReturnSuccess()
         {
             var sut = new CartService();

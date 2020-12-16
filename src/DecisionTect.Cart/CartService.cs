@@ -7,6 +7,28 @@ namespace DecisionTech.Cart
 {
     public class CartService : ICartService
     {
+        private readonly IList<Models.Product> _products = new List<Models.Product>
+        {
+            new Models.Product
+                {
+                    Id = 1,
+                    Name = "Butter",
+                    Cost = .8M
+                },
+                new Models.Product
+                {
+                    Id = 2,
+                    Name = "Milk",
+                    Cost = 1.15M
+                },
+                new Models.Product
+                {
+                    Id = 3,
+                    Name = "Bread",
+                    Cost = 1M
+                },
+        };
+
         private readonly Models.Cart _cart = new Models.Cart();
 
         public CartDto Get()
@@ -23,6 +45,32 @@ namespace DecisionTech.Cart
         public CommandResult<CartDto> AddItem(Models.Cart cart, CartRequest request)
         {
             var result = new CommandResult<CartDto>();
+
+            if (request == null || !request.ProductId.HasValue)
+            {
+                result.Errors.Add("The ProductId field is required.");
+                return result;
+            }
+
+            var product = _products.FirstOrDefault(x => x.Id == request.ProductId);
+            if (product == null)
+            {
+                result.Errors.Add("The ProductId field is invalid.");
+            }
+
+            if (!result.Success) return result;
+
+            var item = cart.Items.FirstOrDefault(x => x.ProductId == request.ProductId);
+            if (item != null)
+            {
+                item.Quantity += request.Quantity;
+            }
+            else
+            {
+                cart.Items.Add(new Models.CartItem { Product = product, Quantity = request.Quantity });
+            }
+
+            result.Model = ConvertToDto(cart);
             return result;
         }
 
